@@ -4,7 +4,7 @@ version: 2.1
 executors:
   my-custom-executor:
     docker:
-      - image: cimg/base:stable
+      - image: cimg/base:2021.04
         environment:
           app: "onurs-test-app"
 jobs:
