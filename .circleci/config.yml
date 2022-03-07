@@ -30,8 +30,8 @@ jobs:
             echo $fullimagetag
       - checkout
       - run: docker --version
-      - run: docker build . -t $app -f Dockerfile
-      - run: docker push $IMAGE_WITH_TAG
+      - run: docker build . -t $fullimagetag -f Dockerfile
+      - run: docker push $fullimagetag
 workflows:
   my-custom-workflow:
     jobs:
