@@ -27,7 +27,7 @@ jobs:
             source $BASH_ENV
             echo $fullimagetag
       - checkout
-      - run: systemctl start docker
+      - run: docker --version
       - run: docker build . -t $app -f Dockerfile
       - run: docker push $IMAGE_WITH_TAG
 workflows:
