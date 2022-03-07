@@ -26,7 +26,7 @@ jobs:
           command: |
             echo 'export PATH=/bin/bash:$PATH' >> $BASH_ENV
             echo 'export timestamp=$(date +%Y%m%d%H%M%S)' >> $BASH_ENV
-            echo 'export tag=test' >> $BASH_ENV
+            echo 'export tag=2.0.1' >> $BASH_ENV
             echo 'export fullimagetag=$app:$tag' >> $BASH_ENV
             source $BASH_ENV
             echo $fullimagetag
@@ -38,6 +38,18 @@ jobs:
       # - run: docker build . -t europe-west2-docker.pkg.dev/onur-tola-sandbox/dummy-repo/$fullimagetag -f Dockerfile 
       - run: docker images
       - run: docker push europe-west2-docker.pkg.dev/onur-tola-sandbox/dummy-repo/$fullimagetag
+      - run:
+          name: kustomize update
+          command: |
+            git clone https://soe-platform-engineering:$github_token@github.com/soenergy/dl-plateng-k8s-deployment.git
+            git config --global user.email "kloudy@so.energy"
+            git config --global user.name "Kloudy bot"
+            cd dl-plateng-k8s-deployment
+            git checkout faster-switching-test
+            cd config/envs/test
+            kustomize edit set image europe-west2-docker.pkg.dev/onur-tola-sandbox/dummy-repo/$app=europe-west2-docker.pkg.dev/onur-tola-sandbox/dummy-repo/$fullimagetag
+            git commit -am 'onurs-test-app docker image updated by kloudy bot'
+            git push origin faster-switching-test
 workflows:
   my-custom-workflow:
     jobs:
