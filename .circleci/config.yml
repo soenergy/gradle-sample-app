@@ -11,6 +11,8 @@ jobs:
   my-job-name: 
     executor: my-custom-executor
     steps:
+      - setup_remote_docker:
+          version: 19.03.13
       - gcp-cli/install:
           version: '369.0.0'
       - gcp-cli/initialize:
