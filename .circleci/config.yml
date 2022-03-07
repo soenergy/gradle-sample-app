@@ -32,9 +32,11 @@ jobs:
       - checkout
       - run: docker --version
       # - run: docker build . -t europe-west2-docker.pkg.dev/onur-tola-sandbox/dummy-repo/onur-test-image -f Dockerfile
-      - run: docker build . -t europe-west2-docker.pkg.dev/onur-tola-sandbox/dummy-repo/$fullimagetag -f Dockerfile 
+      - run: docker build . -t my-app
+      - run: docker tag my-app europe-west2-docker.pkg.dev/onur-tola-sandbox/dummy-repo/$fullimagetag
+      # - run: docker build . -t europe-west2-docker.pkg.dev/onur-tola-sandbox/dummy-repo/$fullimagetag -f Dockerfile 
       - run: docker images
-      - run: docker push docker push europe-west2-docker.pkg.dev/onur-tola-sandbox/dummy-repo/$fullimagetag
+      - run: docker push europe-west2-docker.pkg.dev/onur-tola-sandbox/dummy-repo/$fullimagetag
 workflows:
   my-custom-workflow:
     jobs:
