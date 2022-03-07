@@ -27,9 +27,8 @@ jobs:
             source $BASH_ENV
             echo $fullimagetag
       - checkout
-      - run: ls -la 
-      # - run: docker build . -t $app -f Dockerfile
-      # - run: docker push $IMAGE_WITH_TAG
+      - run: docker build . -t $app -f Dockerfile
+      - run: docker push $IMAGE_WITH_TAG
 workflows:
   my-custom-workflow:
     jobs:
