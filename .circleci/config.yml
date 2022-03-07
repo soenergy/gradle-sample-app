@@ -1,5 +1,6 @@
 orbs:
   gcp-cli: circleci/gcp-cli@2.4.0
+  kustomize: finc/kustomize@0.0.2
 version: 2.1
 executors:
   my-custom-executor:
