@@ -30,8 +30,9 @@ jobs:
             echo $fullimagetag
       - checkout
       - run: docker --version
-      - run: docker build . -t $fullimagetag -f Dockerfile
-      - run: docker push $fullimagetag
+      - run: docker build . -t europe-west2-docker.pkg.dev/onur-tola-sandbox/dummy-repo/onur-test-image -f Dockerfile
+      - run: docker images
+      # - run: docker push $fullimagetag
 workflows:
   my-custom-workflow:
     jobs:
