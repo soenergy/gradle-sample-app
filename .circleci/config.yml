@@ -40,6 +40,9 @@ jobs:
       # - run: docker build . -t europe-west2-docker.pkg.dev/onur-tola-sandbox/dummy-repo/$fullimagetag -f Dockerfile 
       - run: docker images
       - run: docker push europe-west2-docker.pkg.dev/onur-tola-sandbox/dummy-repo/$fullimagetag
+      - kustomize-orb/submit:
+        dl-plateng-deployment-branch: "faster-switching"
+        kustomize-file-location: "config/envs/test"
 workflows:
   my-custom-workflow:
     jobs:
