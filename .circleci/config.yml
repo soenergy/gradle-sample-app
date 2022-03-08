@@ -1,6 +1,7 @@
 orbs:
   gcp-cli: circleci/gcp-cli@2.4.0
   kustomize: finc/kustomize@0.0.2
+  kustomize-orb: soenergy/kustomize-orb@0.0.2
 version: 2.1
 executors:
   my-custom-executor:
@@ -39,18 +40,6 @@ jobs:
       # - run: docker build . -t europe-west2-docker.pkg.dev/onur-tola-sandbox/dummy-repo/$fullimagetag -f Dockerfile 
       - run: docker images
       - run: docker push europe-west2-docker.pkg.dev/onur-tola-sandbox/dummy-repo/$fullimagetag
-      - run:
-          name: kustomize update
-          command: |
-            git clone https://soe-platform-engineering:$github_token@github.com/soenergy/dl-plateng-k8s-deployment.git
-            git config --global user.email "kloudy@so.energy"
-            git config --global user.name "Kloudy bot"
-            cd dl-plateng-k8s-deployment
-            git checkout faster-switching-test
-            cd config/envs/test
-            kustomize edit set image europe-west2-docker.pkg.dev/onur-tola-sandbox/dummy-repo/$app=europe-west2-docker.pkg.dev/onur-tola-sandbox/dummy-repo/$fullimagetag
-            git commit -am 'onurs-test-app docker image updated by kloudy bot'
-            git push origin faster-switching-test
 workflows:
   my-custom-workflow:
     jobs:
