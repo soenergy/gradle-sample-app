@@ -17,7 +17,7 @@ jobs:
           version: 19.03.13
       - kustomize/install
       - gcp-cli/install:
-          version: '369.0.0'
+          version: 369.0.0
       - gcp-cli/initialize:
           gcloud-service-key: service_account 
           google-project-id: project_id
